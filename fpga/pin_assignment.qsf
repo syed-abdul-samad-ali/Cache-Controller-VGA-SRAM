@@ -1,0 +1,31 @@
+# Quartus Prime Pin Assignments File
+# Target Device: Cyclone IV / MAX 10 FPGA
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE115F29C7
+set_global_assignment -name TOP_LEVEL_ENTITY top_module
+
+# Clock and Reset Assignments
+set_location_assignment PIN_Y2 -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+
+set_location_assignment PIN_M23 -to reset
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to reset
+
+# CPU / Request Interface
+set_location_assignment PIN_AB28 -to read_req
+set_location_assignment PIN_AC28 -to write_req
+set_location_assignment PIN_AC27 -to cpu_addr[0]
+set_location_assignment PIN_E21 -to hit
+
+# VGA Interface Assignments
+set_location_assignment PIN_G13 -to hsync
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to hsync
+
+set_location_assignment PIN_C13 -to vsync
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to vsync
+
+set_location_assignment PIN_D12 -to rgb_out[0]
+set_location_assignment PIN_D11 -to rgb_out[1]
+set_location_assignment PIN_C12 -to rgb_out[2]
+set_location_assignment PIN_A12 -to rgb_out[3]
