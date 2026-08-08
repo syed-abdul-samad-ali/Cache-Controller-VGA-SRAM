@@ -1,0 +1,21 @@
+module tb_vga_controller;
+    reg clk, reset;
+    wire hsync, vsync;
+    wire [3:0] vga_r, vga_g, vga_b;
+
+    vga_controller DUT (
+        .clk(clk), .reset(reset), .hsync(hsync), .vsync(vsync),
+        .vga_r(vga_r), .vga_g(vga_g), .vga_b(vga_b)
+    );
+
+    initial begin clk = 0; forever #10 clk = ~clk; end
+
+    initial begin
+        $dumpfile("vga_sim.vcd");
+        $dumpvars(0, tb_vga_controller);
+
+        reset = 1; #100; reset = 0;
+        #200000; 
+        $finish;
+    end
+endmodule
