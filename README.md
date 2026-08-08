@@ -9,7 +9,7 @@ A complete Digital IC / RTL design project implemented in Verilog HDL. This proj
 - **Toolchain & Verification:** Simulated using QuestaSim / GTKWave, and targeted for Intel Quartus FPGA synthesis.
 
 ## Directory Structure
-- `rtl/`: Core Verilog modules (`cache_controller.v`, `vga_controller.v`, `sram_interface.v`, `top_module.v`)
+- `rtl/`: Core Verilog modules (`cache_controller.v`, `vga_controller.v`, `single_port_sram`, `top_module.v`)
 - `tb/`: Simulation testbenches (`tb_cache_controller.v`, `tb_vga.v`)
 - `fpga/`: Intel Quartus synthesis pin constraints (`pin_assignment.qsf`)
 
