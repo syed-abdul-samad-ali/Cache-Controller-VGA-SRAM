@@ -1,0 +1,53 @@
+module top_module (
+    input wire clk,
+    input wire reset,
+    
+    // CPU / Input Interface
+    input wire read_req,
+    input wire write_req,
+    input wire [0:0] cpu_addr,
+    input wire [36:0] cpu_data_in,
+    output wire [36:0] cpu_data_out,
+    output wire hit,
+    
+    // VGA Outputs
+    output wire hsync,
+    output wire vsync,
+    output wire [3:0] rgb_out
+);
+
+    // Internal interconnect wires
+    wire sram_chip_en;
+    wire sram_write_en;
+    wire sram_read_en;
+    wire [0:0] sram_addr;
+    wire [36:0] sram_data_in;
+    wire [36:0] sram_data_out;
+
+    // 1. SRAM Primitive Instantiation
+    single_port_sram memory_inst (
+        .clk(clk),
+        .reset(reset),
+        .chip_enable(sram_chip_en),
+        .write_enable(sram_write_en),
+        .read_enable(sram_read_en),
+        .address(sram_addr),
+        .data_in(sram_data_in),
+        .data_out(sram_data_out)
+    );
+
+    // 2. Cache Controller Instantiation (Logic Placeholder)
+    assign sram_chip_en   = read_req | write_req;
+    assign sram_write_en  = write_req;
+    assign sram_read_en   = read_req;
+    assign sram_addr      = cpu_addr;
+    assign sram_data_in   = cpu_data_in;
+    assign cpu_data_out   = sram_data_out;
+    assign hit            = 1'b1; // Simplified hit signal logic
+
+    // 3. VGA Controller Instantiation (Timing Placeholder)
+    assign hsync   = 1'b1;
+    assign vsync   = 1'b1;
+    assign rgb_out = sram_data_out[3:0];
+
+endmodule
